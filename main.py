@@ -1,10 +1,11 @@
 import requests
 import config
-import api_connection as api
+import api_utils as api
 
-auth_token = api.authenticate(config.USERNAME, config.PASSWORD,
+auth_token = api.get_auth_token(config.USERNAME, config.PASSWORD,
                                 config.priaid_authservice_url)
 
-symptoms = requests.get(
-    f'{config.priaid_healthservice_url}/symptoms?token={auth_token}&language={config.language}').json()
+symptoms = api.get_all_symptoms(config.priaid_healthservice_url, auth_token,
+                                config.language)
+
 print(symptoms)

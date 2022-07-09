@@ -1,10 +1,9 @@
 import hmac
 import requests
-import config
 import base64
 
 
-def authenticate(username, password, auth_url):
+def get_auth_token(username, password, auth_url):
     """
     Connect to the API and get the auth token
     :param username: username for api
@@ -25,5 +24,21 @@ def authenticate(username, password, auth_url):
 
         return auth_response.json()['Token']
     except Exception as e:
-        print('Error occured when authenticating: \n', e)
+        print('Error occurred when authenticating: \n', e)
+        return None
+
+
+def get_all_symptoms(url, auth_token, language):
+    """
+    Get all symptoms from the API
+    :return: list - all symptoms
+    """
+    try:
+        symptoms_url = f'{url}/symptoms?token={auth_token}&language={language}'
+        symptoms_response = requests.get(symptoms_url,
+                                         headers={
+                                             'Authorization': f'Bearer {auth_token}'})
+        return symptoms_response.json()
+    except Exception as e:
+        print('Error occurred when getting symptoms: \n', e)
         return None
