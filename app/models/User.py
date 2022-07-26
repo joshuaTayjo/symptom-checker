@@ -1,3 +1,4 @@
+from datetime import date
 from ..db import db
 from .model import UtilModel
 
@@ -10,3 +11,10 @@ class User(UtilModel, db.Model):
     password = db.Column(db.CHAR(60), nullable=False)
     birth_year = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.Integer, nullable=False)
+
+    def get_selector(self):
+        todays_date = date.today()
+        if todays_date.year - self.birth_year <= 11:
+            return 'girl' if self.gender else 'boy'
+        else:
+            return 'woman' if self.gender else 'man'
