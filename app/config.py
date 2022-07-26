@@ -1,4 +1,4 @@
-USERNAME = 'joshua_tayjo@yahoo.com'  # Here enter your API user name
+USERNAME = 'joshua_tayjo@yahoo.com'  # Here enter your API user.py name
 PASSWORD = 'j9XDr87LwAk4x5WCo'  # Here enter your API password
 priaid_authservice_url = 'https://sandbox-authservice.priaid.ch/login'  # Be
 # aware that sandbox link is for testing purpose (not real data) once you

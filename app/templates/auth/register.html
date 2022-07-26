@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <label for="first_name">First Name</label>
+    <input name="first_name" id="first_name">
+
+    <label for="last_name">Last Name</label>
+    <input name="last_name" id="last_name">
+
+    <label for="gender">Gender (assigned at birth)</label>
+    <select name="gender" id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+
+    <label for="birth_year">Birth Year</label>
+    <input type="number" name="birth_year" id="birth_year" min="1900"
+           max="2022" step="1" value="2022">
+
+    <label for="email">Email</label>
+    <input name="email" id="email" required>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+
+    <input type="submit" value="Register">
+</form>
+{% endblock %}
