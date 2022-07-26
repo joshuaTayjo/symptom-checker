@@ -1,5 +1,7 @@
+import configparser
 import os
 from flask import Flask
+import app.config
 from .models.User import User
 from .db import db
 from . import auth
@@ -8,8 +10,8 @@ from . import symptom_checker
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-        SQLALCHEMY_DATABASE_URI='sqlite:///symptom-checker.db')
+    app.config.from_mapping(SECRET_KEY='dev',
+                            SQLALCHEMY_DATABASE_URI='sqlite:///symptom-checker.db')
 
     if test_config is None:
         # load the instance config if it exists, when not testing

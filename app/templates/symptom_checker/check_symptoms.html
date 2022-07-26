@@ -6,6 +6,33 @@
 
 {% block content %}
 <p>Input your symptoms below to get a list of possible diagnoses</p>
-<form action="post">
+<form method="POST">
+    <label for="symptoms">Type in symptoms here</label>
+    <div class="text-container">
+        <input name="symptom" id="symptom" list="symptoms"
+               placeholder="e.g Cough"/>
+        <datalist id="symptoms">
+            {% for symptom in all_symptoms %}
+            <option value="{{ symptom.Name }}">{{ symptom.Name }}</option>
+            {% endfor %}
+        </datalist>
+    </div>
 
+    <!--    {% for body_location in body_locations %}-->
+    <!--    <datalist>-->
+    <!--        <option>{{ body_location.Name }}</option>-->
+    <!--        {% if not loop.last %}-->
+
+    <!--        {% endif %}-->
+    <!--    </datalist>-->
+
+    <!--    {% endfor %}-->
 </form>
+    {% for symptom in symptoms %}
+    <p>{{ symptom.Name }}</p>
+    {% endfor %}
+
+{% endblock %}
+
+
+

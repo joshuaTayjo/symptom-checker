@@ -72,7 +72,7 @@ class Priaid:
         """
         return self._load_from_api('issues')
 
-    def get_issue(self, issue_id: str | int):
+    def get_issue(self, issue_id):
         """
         Get issue from the API
         :param issue_id: issue id
@@ -81,7 +81,7 @@ class Priaid:
         return self._load_from_api(f'issues/{issue_id}/info')
 
     def get_diagnosis(self, symptoms: list, gender: str,
-                      year_of_birth: str | int):
+                      year_of_birth):
         """
         :param symptoms: list of ints of selected symptom ids
         :param gender: string 'male' or 'female'
@@ -100,7 +100,7 @@ class Priaid:
         """
         return self._load_from_api('body/locations')
 
-    def get_body_sublocations(self, body_location_id: str | int):
+    def get_body_sublocations(self, body_location_id):
         """
         :param body_location_id: body location id
         :return: list of body sublocations from app json data based on
@@ -109,7 +109,7 @@ class Priaid:
         return self._load_from_api(
             f'body/locations/{body_location_id}')
 
-    def get_sublocation_symptoms(self, body_sublocation_id: str | int,
+    def get_sublocation_symptoms(self, body_sublocation_id,
                                  age_gender_selector: str):
         """
         :param body_sublocation_id: body sublocation id
@@ -122,7 +122,7 @@ class Priaid:
             f'symptoms/{body_sublocation_id}/{age_gender_selector}')
 
     def get_related_symptoms(self, symptoms: list, gender: str,
-                             year_of_birth: str | int):
+                             year_of_birth):
         """
         :param symptoms: list of symptom id's
         :param gender: str 'male' or 'female'

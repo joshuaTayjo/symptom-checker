@@ -48,7 +48,7 @@ def login():
         password = request.form['password']
         db = get_db()
         error = None
-        user = db.query(User).filter_by(email=email).first()
+        user = User.query.filter_by(email=email).first()
 
         if user is None:
             error = 'Incorrect email.'
@@ -59,9 +59,14 @@ def login():
             session.clear()
             session['user_id'] = user.id
             return redirect(url_for('index'))
-
         flash(error)
     return render_template('auth/login.html')
+
+
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 
 @bp.before_app_request
@@ -71,7 +76,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = get_db().query(User).filter_by(id=user_id).first()
+        g.user = User.query.filter_by(id=user_id).first()
 
 
 def login_required(view):
