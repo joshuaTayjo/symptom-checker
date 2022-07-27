@@ -20,9 +20,25 @@
         </div>
         <div class="categories">
             <label for="symptoms">Or search by category</label>
+            {% for body_location, sublocations in symptoms_by_location.items()
+            %}
+            <h1>{{ body_location }}</h1>
+            {% for sublocation in sublocations %}
+            {% for curr_location, symptoms in sublocation.items() %}
+
+            {% if symptoms %}
+            <h3>{{ curr_location }}</h3>
+            {% for symptom in symptoms %}
+            <p>{{ symptom['Name'] }}</p>
+            {% endfor %}
+            {% endif %}
+
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
         </div>
+    </form>
 </div>
-</form>
 
 
 <!--    {% for body_location in body_locations %}-->
