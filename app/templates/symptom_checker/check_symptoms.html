@@ -5,12 +5,13 @@
 
 {% block content %}
 <div id="vm">
-    <p>Input your symptoms below to get a list of possible diagnoses [[greeting]]</p>
+    <p>Input your symptoms below to get a list of possible diagnoses
+        [[ greeting ]]</p>
     <form method="POST">
         <label for="symptoms">Type in symptoms here</label>
         <div class="drop-down">
             <input name="symptom" id="symptom" list="symptoms"
-            placeholder="e.g Cough"/>
+                   placeholder="e.g Cough"/>
             <datalist id="symptoms">
                 {% for symptom in all_symptoms %}
                 <option value="{{ symptom.Name }}">{{ symptom.Name }}</option>
@@ -19,23 +20,22 @@
         </div>
         <div class="categories">
             <label for="symptoms">Or search by category</label>
-            
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
-    <script src="{{url_for('static', filename='index.js')}}"></script>
-    
-    
-    <!--    {% for body_location in body_locations %}-->
-    <!--    <datalist>-->
-    <!--        <option>{{ body_location.Name }}</option>-->
-    <!--        {% if not loop.last %}-->
-
-    <!--        {% endif %}-->
-    <!--    </datalist>-->
-
-    <!--    {% endfor %}-->
+</div>
 </form>
+
+
+<!--    {% for body_location in body_locations %}-->
+<!--    <datalist>-->
+<!--        <option>{{ body_location.Name }}</option>-->
+<!--        {% if not loop.last %}-->
+
+<!--        {% endif %}-->
+<!--    </datalist>-->
+
+<!--    {% endfor %}-->
+<script src="https://unpkg.com/vue@3"></script>
+<script src="{{url_for('static', filename='index.js')}}"></script>
 {% endblock %}
 
 
