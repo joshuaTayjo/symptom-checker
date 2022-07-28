@@ -22,19 +22,32 @@
             <label for="symptoms">Or search by category</label>
             {% for body_location, sublocations in symptoms_by_location.items()
             %}
-            <h1>{{ body_location }}</h1>
-            {% for sublocation in sublocations %}
-            {% for curr_location, symptoms in sublocation.items() %}
-
-            {% if symptoms %}
-            <h3>{{ curr_location }}</h3>
-            {% for symptom in symptoms %}
-            <p>{{ symptom['Name'] }}</p>
-            {% endfor %}
-            {% endif %}
-
-            {% endfor %}
-            {% endfor %}
+            <ul>
+                <li class="body-location"
+                    @click="toggleLocation">
+                    {{ body_location }}
+                    {% for sublocation in sublocations %}
+                    {% for curr_location, symptoms in sublocation.items() %}
+                    <ul>
+                        {% if symptoms %}
+                        <li v-show="checkLocation"
+                            class="body-sublocation"
+                            ref="{{curr_location['Name']}}">
+                            {{ curr_location }}
+                            <ul>
+                                {% for symptom in symptoms %}
+                                <li class="symptom" ref="{{symptom}}">
+                                    {{ symptom['Name'] }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
             {% endfor %}
         </div>
     </form>
@@ -50,7 +63,11 @@
 <!--    </datalist>-->
 
 <!--    {% endfor %}-->
-<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/vue@3"></script>'
+<!--<script>-->
+<!--    const symptomsByLocation = JSON.parse('{{jsSymptoms | safe}}')-->
+<!--    console.log(symptomsByLocation)-->
+<!--</script>-->
 <script src="{{url_for('static', filename='index.js')}}"></script>
 {% endblock %}
 

@@ -30,8 +30,6 @@ def create_app(test_config=None):
     app.register_blueprint(symptom_checker.bp)
     app.add_url_rule('/', endpoint='index')
 
-    @app.route('/user1')
-    def user1():
-        return {'users': [user.as_dict() for user in User.query.all()]}
+
 
     return app

@@ -16,8 +16,10 @@ h1 {
     margin: 1rem 0;
 }
 
-a {
+a, a:hover, a:focus {
     color: #377ba8;
+    text-decoration: none;
+    text-underline: none;
 }
 
 hr {
@@ -53,6 +55,19 @@ nav ul li a, nav ul li span, header .action {
     display: block;
     padding: 0.5rem;
 }
+
+ul li {
+    list-style: none;
+}
+
+.active {
+    display: block
+}
+
+.body-location .body-sublocation .symptom {
+    display: none
+}
+
 
 .content {
     padding: 0 1rem 1rem;

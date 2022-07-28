@@ -1,10 +1,12 @@
+import os
+
 from flask import (Blueprint, flash, g, redirect, render_template, request,
                    url_for)
 from werkzeug.exceptions import abort
 from .auth import login_required
 import app.config as config
 from .priaid_api import Priaid
-import pprint
+import json
 
 health_api = Priaid(config.USERNAME, config.PASSWORD,
                     config.priaid_authservice_url,
@@ -23,14 +25,20 @@ def index():
 def check_symptoms():
     selector = g.user.get_selector()
     body_locations = health_api.get_all_body_locations()
-    symptoms_by_location = {
-        location['Name']:
-            [{sublocation['Name']: health_api.get_sublocation_symptoms(
-                sublocation['ID'], selector)} for sublocation in
-                health_api.get_body_sublocations(location['ID'])]
-        for location in body_locations}
     all_symptoms = health_api.get_all_symptoms()
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), (
+            'static/data/symptoms.json'))) as data_file:
+        symptoms_by_location = json.load(data_file)
+        jsSymptoms = str(json.dumps(symptoms_by_location)).replace("'", r'\'')
     return render_template('symptom_checker/check_symptoms.html',
                            body_locations=body_locations,
                            all_symptoms=all_symptoms,
-                           symptoms_by_location=symptoms_by_location)
+                           symptoms_by_location=symptoms_by_location,
+                           jsSymptoms=jsSymptoms)
+
+    # symptoms_by_location = {
+    #     location['Name']:
+    #         [{sublocation['Name']: health_api.get_sublocation_symptoms(
+    #             sublocation['ID'], selector)} for sublocation in
+    #             health_api.get_body_sublocations(location['ID'])]
+    #     for location in body_locations}
